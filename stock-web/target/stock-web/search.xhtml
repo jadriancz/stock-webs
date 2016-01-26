@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+      <h:head>
+    </h:head>
+      <h:body>
+      <h:form id="sForm" >
+     <f:metadata>
+        	<f:event type="preRenderView" listener="#{sepomexBean.init}" />
+    	</f:metadata>
+      <h:panelGroup>
+      <h:panelGrid columns="1">
+           <p:selectOneMenu effect="fold"   value="#{sepomexBean.selectedEstado}" >
+                  <f:selectItem itemLabel="--Seleccionar Estado--" itemValue="-1" />
+                 <f:selectItems value="#{sepomexBean.estados}" />
+               <p:ajax update="@form"  listener= "#{sepomexBean.changedEntidad}" />
+              </p:selectOneMenu>
+             <p:selectOneMenu effect="fold" value="#{sepomexBean.selectedEntidad}">
+                <f:selectItem itemLabel="Delegacion/Municipio" itemValue="-1"  />
+                <f:selectItems value="#{sepomexBean.entidad}" />
+                   <p:ajax update="@form"  listener= "#{sepomexBean.changedCP}" />
+            </p:selectOneMenu>
+     <p:multiSelectListbox effect="slide" header="Categories" showHeaders="true">
+         <f:selectItems value="#{sepomexBean.cp}" />
+    </p:multiSelectListbox>
+
+         
+         </h:panelGrid>
+         </h:panelGroup>
+         
+      
+         
+         
+            
+             
+      </h:form>
+      </h:body>
+</html>

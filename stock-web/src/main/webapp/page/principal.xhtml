@@ -5,12 +5,102 @@
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+        xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:pe="http://primefaces.org/ui/extensions">
       <h:head>
  </h:head>
       <h:body>
       <h:form id="sForm" >
-<p:dataTable var="car" value="#{stockManagedBean.producto}">
+      
+  
+   <p:panel id="panelRegistro"
+                         style="border-bottom:none!important;border-bottom-right-radius:0;border-bottom-left-radius:0;"
+                         styleClass="panel-interno" header="Registro">
+                         <table border="0" width="100%" cellpadding="2" cellspacing="2">
+                            <tr>
+                                <td width="22%" rowspan="3" valign="bottom"><h:outputLabel value="Registro de producto" style="float:left;font-weight:bold"/></td>
+                                <td width="78%">
+                                        <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="70%"><h:outputLabel value="texto1" style="float:right;font-weight:bold;"/></td>
+                                                <td width="30%">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="78%">
+                                    <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td width="70%"><h:outputLabel  value="texto2" style="float:right;font-weight:bold;"/></td>
+                                          </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="78%">
+                                    <table border="0" width="60%" cellpadding="0" cellspacing="0" align="right">
+                                        <tr>
+                                            <td width="70%">
+                                            <h:outputLabel id="lblAmparadoId" value="texto3" style="float:right;font-weight:bold"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                         </table>
+                    <p:separator/>
+                     <table id="panelDatosOrden" border="0" width="100%" cellpadding="3" cellspacing="2">
+                          <tr>
+                            <td width="50%">
+                                <table border="0" cellpadding="2" cellspacing="0">
+                                    <tr>
+                                        <td><h:outputLabel value="Nombre" style="font-weight:bold"/><h:outputText value=" *" style="color:red"/></td>
+                                        <td>
+                                            <p:inputText id="txtNombre" maxlength="13" value="#{StockManagedBean.producto.nombre}">
+                                            </p:inputText>
+                                        </td>
+                                        <td>
+                                      
+                                        </td>
+                                    </tr>
+                                    <tr><td colspan="3"></td></tr>
+                                </table>
+                            </td>
+                            <td width="50%">
+                                <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                                      <tr><td><h:outputLabel value="Concentracion" style="font-weight:bold"/></td></tr>
+                                      <tr><td><p:inputText id="txtConcentracion" style="width:325px;height:auto;"  value="#{StockManagedBean.producto.concentracion}"/></td></tr>
+                                </table>
+                            </td> 
+                          </tr>
+                          <tr>
+                            <td width="50%">
+                                <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                                      <tr><td><h:outputLabel value="Cantidad" style="font-weight:bold"/></td></tr>
+                                      <tr><td><p:inputText id="txtCantidad" style="width:325px;height:auto;" value="#{StockManagedBean.producto.cantidad}"/></td></tr>
+                                </table>
+                            </td>
+                            <td width="50%">
+                                <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                                      <tr><td><h:outputLabel value="Precio" style="font-weight:bold"/></td></tr>
+                                      <tr><td>
+                                       <pe:inputNumber id="txtPrecio" value="#{stockManagedBean.producto.precio}" decimalSeparator="." thousandSeparator="," maxValue="999999999999.99" required="false" requiredMessage="" style="width:100px" decimalPlaces="2" >
+                                        <p:ajax event="keyup" update=""/>
+                                        </pe:inputNumber>
+                                      </td></tr>
+                                </table>
+                            </td> 
+                          </tr>
+                                                 
+                    </table>
+                    
+                    
+                    
+                </p:panel>   
+      
+ <p:panel>     
+<p:dataTable var="car" value="#{stockManagedBean.listaProducto}">
     <p:column headerText="Id">
         <h:outputText value="#{car.idMedicamento}" />
     </p:column>
@@ -25,7 +115,10 @@
  
     
 </p:dataTable>
+      </p:panel>
       
+      
+ 
       </h:form>
       </h:body>
 </html>

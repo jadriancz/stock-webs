@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:pe="http://primefaces.org/ui/extensions">
+      <h:head>
+ </h:head>
+      <h:body>
+      <h:form id="formPago" >
+      
+  
+     
+  <h:panelGrid id="panelAcciones" width="850" >
+                        <p:column>
+                            <table id="panelImpuestos" border="0" cellpadding="3" cellspacing="3">
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="#{msj['lbl.propuestas.impuesto']}:" style="font-weight:bold"/>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{msj['lbl.propuestas.monto']}:" style="font-weight:bold"/>
+                                    </td>
+                                    <td colspan="2">
+                                        <h:outputLabel value="#{msj['lbl.propuestas.periodo']}:" style="font-weight:bold"/>
+                                    </td>
+                                    <td valign="middle" rowspan="3">
+                                        <p:commandButton id="btnAgregarImpuestoId" value="#{msj['lbl.propuestas.btnAgregarImpuesto']}"
+                                                 actionListener="#{StockManagedBean.agregarImpuesto}"
+                                                 update="" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <pe:inputNumber id="txtMonto" value="#{StockManagedBean.impuestoVO.monto}" decimalSeparator="." thousandSeparator="," maxValue="999999999999.99" required="false" requiredMessage="" style="width:100px" decimalPlaces="2" >
+                                        <p:ajax event="keyup" update=""/>
+                                        </pe:inputNumber>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{msj['lbl.propuestas.del']}:" style="font-weight:bold"/>
+                                        <p:calendar id="txtPeriodo" locale="es" pattern="dd/MM/yyyy" showOn="button"
+                                                readonlyInput="true" size="8" mindate="#{StockManagedBean.propuesta.fechaInicioPeriodo}" maxdate="#{StockManagedBean.fechaActualImpuesto}"
+                                                value="#{StockManagedBean.impuestoVO.fechaInicial}" navigator="true">
+                                        <p:ajax event="dateSelect" update="" listener="#{StockManagedBean.handleDateSelectFechaFinImp}" onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+                                    </p:calendar>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td colspan="2"><p:message id="msgPeriodo" for="txtPeriodo" display="text"/></td>
+                                </tr>
+                            </table>
+                           
+                        </p:column>
+                    </h:panelGrid>
+                    <br/>
+                    <p:column >
+                        <div align="center">
+                            <p:dataTable id="tblImpuestos" var="impuesto" value="#{StockManagedBean.listaImpuestos}"
+                                         emptyMessage="#{msj['label.lista.vacia']}" style="width:550px;">
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{msj['lbl.propuestas.impuestos']}" style="font-weight:bold"/>
+                                </f:facet>
+                                <p:columnGroup type="header">
+                                    <p:row>
+                                        <p:column rowspan="2" headerText="impuesto"/>
+                                        <p:column rowspan="2" headerText="monto"/>
+                                        <p:column colspan="2" headerText="periodo"/>
+                                        <p:column rowspan="2" headerText=""/>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column headerText="del"/>
+                                        <p:column headerText="al"/>
+                                    </p:row>
+                                </p:columnGroup>
+                                <p:column>
+                                    <h:outputText value="#{impuesto.descripcion}"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="#{impuesto.monto}">
+                                        <f:convertNumber currencySymbol="$" currencyCode="MXN" type="currency" locale="es_MX"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText id="txtFechaInicio" value="#{impuesto.fechaInicial}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText id="txtFechaFin" value="#{impuesto.fechaFin}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <p:commandLink value="#{msj['lbl.propuestas.eliminarImpuesto']}"
+                                                   action="#{StockManagedBean.descartarImpuesto}"
+                                                   ajax="true" immediate="true" update="@form"
+                                                >
+                                        <f:setPropertyActionListener value="#{impuesto}"
+                                                                     target="#{StockManagedBean.impuestoSeleccionado}" onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
+                                    </p:commandLink>
+                                </p:column>
+                                <p:columnGroup type="footer">
+                                    <p:row>
+                                        <p:column footerText="#{msj['lbl.propuestas.presuntiva']}: " style="text-align:right"/>
+                                        <p:column colspan="4" style="text-align:left;">
+                                            <f:facet name="footer">
+                                                <h:outputText value="#{StockManagedBean.totalMonto}">
+                                                    <f:convertNumber currencySymbol="$" currencyCode="MXN" type="currency" locale="es_MX"/>
+                                                </h:outputText>
+                                            </f:facet>
+                                        </p:column>
+                                    </p:row>
+                                </p:columnGroup>
+                            </p:dataTable>
+                        </div>
+                    </p:column>      
+      
+    
+      </h:form>
+      </h:body>
+</html>

@@ -5,6 +5,16 @@ xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/
    id="WebApp_ID" 
    version="2.5">
   <display-name>Archetype Created Web Application</display-name>
+ 
+ 
+ <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
   <welcome-file-list>
     <welcome-file>faces/page/principal.xhtml</welcome-file>
   </welcome-file-list>
@@ -33,4 +43,12 @@ xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+    
+  </context-param>
+  
+  
+  
 </web-app>

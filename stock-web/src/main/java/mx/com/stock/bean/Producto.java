@@ -1,6 +1,7 @@
 package mx.com.stock.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Producto implements Serializable {
 	
@@ -11,7 +12,8 @@ public class Producto implements Serializable {
 		private int idMedicamento;
 	    private String nombre;
 	    private String concentracion;
-	    
+	    private int cantidad;
+	    private BigDecimal precio;
 	
 	    
 	    
@@ -32,6 +34,18 @@ public class Producto implements Serializable {
 		}
 		public void setConcentracion(String concentracion) {
 			this.concentracion = concentracion;
+		}
+		public int getCantidad() {
+			return cantidad;
+		}
+		public void setCantidad(int cantidad) {
+			this.cantidad = cantidad;
+		}
+		public BigDecimal getPrecio() {
+			return precio;
+		}
+		public void setPrecio(BigDecimal precio) {
+			this.precio = precio;
 		}
 	    
 	    

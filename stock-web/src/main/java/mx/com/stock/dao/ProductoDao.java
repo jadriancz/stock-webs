@@ -7,6 +7,6 @@ import mx.com.stock.bean.Producto;
 public interface ProductoDao {
 
 	public  List<Producto> obtieneProductoTodos();
-	
+	public  void insertarProducto(Producto producto);
 	
 }

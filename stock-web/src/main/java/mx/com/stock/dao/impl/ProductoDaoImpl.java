@@ -37,7 +37,7 @@ public class ProductoDaoImpl extends dbConection  implements ProductoDao {
 				p.setNombre( rs.getString (2));
 				p.setConcentracion(rs.getString (3));
 				p.setCantidad(rs.getInt (4));
-				p.setPrecio(new BigDecimal(rs.getString (5)));
+				//p.setPrecio(new BigDecimal(rs.getString (5)));
 				
 			    System.out.println (rs.getInt (1) + " " + rs.getString (2)+ " " + rs.getString(3)); 
 			

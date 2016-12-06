@@ -1,6 +1,7 @@
 package mx.com.stock.web.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -33,8 +34,10 @@ public class StockManagedBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		listaProducto =new ArrayList<Producto>();
         setProducto(new Producto());
 		consultaServiceMedicamentos();
+		producto= new Producto(); 
 	}
 
 	public void consultaServiceMedicamentos() {
@@ -45,6 +48,10 @@ public class StockManagedBean implements Serializable {
 
 	public void guardarProducto() {
 		getStockService().guardarProducto(producto);
+		setProducto(new Producto());
+		consultaServiceMedicamentos();
+		
+		
 
 	}
 

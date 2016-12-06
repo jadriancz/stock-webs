@@ -48,7 +48,9 @@ public class dbConection {
         Connection connection;
         Properties prop = new Properties();
         System.out.println("test");
-        String host = "jdbc:mysql://localhost/inventario";
+       
+        String host =  "jdbc:mysql://node14916-sysControlCu.jl.serv.net.mx/inventario";
+        //String host = "jdbc:mysql://localhost/inventario";
         String username = "user";
         String password = "user1";
         System.out.println("host: " + host + "\nusername: " + username + "\npassword: " + password );

@@ -29,17 +29,17 @@ public class ProductoDaoImpl extends dbConection  implements ProductoDao {
 		List<Producto> list=new ArrayList<Producto>();
 		try {
 			statement = createConnectionlocal().createStatement();
-			ResultSet rs = statement.executeQuery("select * from medicamentos");	// TODO Auto-generated method stub
+			ResultSet rs = statement.executeQuery("select * from medicamentos");	
 			while (rs.next()) 
 			{
 				Producto p=new Producto();	
-				p.setIdMedicamento(rs.getInt (1));
+     		    p.setIdMedicamento(rs.getInt (1));
 				p.setNombre( rs.getString (2));
 				p.setConcentracion(rs.getString (3));
 				p.setCantidad(rs.getInt (4));
-				//p.setPrecio(new BigDecimal(rs.getString (5)));
+				p.setPrecio(new BigDecimal(rs.getFloat(5)));
 				
-			    System.out.println (rs.getInt (1) + " " + rs.getString (2)+ " " + rs.getString(3)); 
+			   System.out.println (rs.getInt (1) + " " + rs.getString (2)+ " " + rs.getString(3)); 
 			
 			    list.add(p);
 			} 
@@ -49,13 +49,10 @@ public class ProductoDaoImpl extends dbConection  implements ProductoDao {
 			createConnectionlocal().close();
 			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	  
@@ -78,10 +75,10 @@ public class ProductoDaoImpl extends dbConection  implements ProductoDao {
 				callableStatement.close();
 				createConnectionlocal().close();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
+			
 				e1.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+		
 				e.printStackTrace();
 			}
 			
